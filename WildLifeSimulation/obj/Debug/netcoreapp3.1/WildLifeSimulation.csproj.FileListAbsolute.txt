@@ -1,0 +1,13 @@
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\bin\Debug\netcoreapp3.1\WildLifeSimulation.exe
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\bin\Debug\netcoreapp3.1\WildLifeSimulation.deps.json
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\bin\Debug\netcoreapp3.1\WildLifeSimulation.runtimeconfig.json
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\bin\Debug\netcoreapp3.1\WildLifeSimulation.runtimeconfig.dev.json
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\bin\Debug\netcoreapp3.1\WildLifeSimulation.dll
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\bin\Debug\netcoreapp3.1\WildLifeSimulation.pdb
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.csprojAssemblyReference.cache
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.AssemblyInfoInputs.cache
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.AssemblyInfo.cs
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.csproj.CoreCompileInputs.cache
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.dll
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.pdb
+D:\SzymonW\projekty\CSharp\WildLifeSimulation\WildLifeSimulation\obj\Debug\netcoreapp3.1\WildLifeSimulation.genruntimeconfig.cache
