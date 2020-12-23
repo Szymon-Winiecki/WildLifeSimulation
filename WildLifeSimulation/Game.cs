@@ -1,12 +1,9 @@
-﻿using System;
-using WildLifeSimulation.GameStates;
+﻿using WildLifeSimulation.GameStates;
 
 namespace WildLifeSimulation
 {
     class Game
     {
-        public static readonly GameState EndGameState = new EndGameState();
-
         private bool isRunning = false;
         private GameState actualGameState;
 
@@ -27,9 +24,9 @@ namespace WildLifeSimulation
         {
             while (isRunning)
             {
-                //invoke actualGameState main funtion
+                actualGameState = actualGameState.Main();
 
-                if(actualGameState == Game.EndGameState)
+                if(actualGameState.GetType() == GameState.endGame)
                 {
                     isRunning = false;
                 }

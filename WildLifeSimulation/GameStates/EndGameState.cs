@@ -6,5 +6,9 @@ namespace WildLifeSimulation.GameStates
 {
     class EndGameState : GameState
     {
+        public override GameState Main()
+        {
+            return this;//tmp
+        }
     }
 }

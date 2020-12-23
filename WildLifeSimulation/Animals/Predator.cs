@@ -1,14 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using WildLifeSimulation.World;
 
 namespace WildLifeSimulation.Animals
 {
     class Predator : Animal
     {
-        protected int healthPoints;
+        protected int maxHealthPoints;
+        protected int actualHealthPoints;
 
-        protected void Hunt() { }
-        protected void Eat() { }
+        public Predator(Map map, Gender gender, Position position, int maxHp, Reporter reporter) : base(map, gender, position, reporter)
+        {
+            this.maxHealthPoints = maxHp;
+            this.actualHealthPoints = maxHp;
+        }
+        public void Hunt() 
+        {
+            Animal prey = map.GetTileAt(position).GetAnyNonPredator();
+            if (prey == null)
+            {
+                actualHealthPoints--;
+                if(actualHealthPoints == 0)
+                {
+                    Die();
+                }
+            }
+            else
+            {
+                Eat(prey);
+            }
+        }
+        protected void Eat(Animal prey) 
+        {
+            prey.Die();
+            actualHealthPoints = maxHealthPoints;
+            reporter.ReportHuntedPrey(this, prey);
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            reporter.ReportDeath(this);
+        }
+
+        protected override void giveBirth(Gender babyGender)
+        {
+            Animal baby = (Animal)Activator.CreateInstance(this.GetType(), this.map, babyGender, new Position(this.position), this.maxHealthPoints, reporter);
+            map.GetTileAt(position).AddAnimal(baby);
+            reporter.ReportBirth(baby);
+        }
     }
 }

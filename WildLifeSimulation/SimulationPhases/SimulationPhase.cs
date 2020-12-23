@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using WildLifeSimulation.World;
 
 namespace WildLifeSimulation.SimulationPhases
 {
-    class SimulationPhase
+    abstract class SimulationPhase
     {
+        protected Map map;
+
+        public SimulationPhase(Map map)
+        {
+            this.map = map;
+        }
+        public abstract bool Main();
     }
 }

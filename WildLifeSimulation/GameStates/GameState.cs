@@ -4,7 +4,10 @@ using System.Text;
 
 namespace WildLifeSimulation.GameStates
 {
-    class GameState
+    abstract class GameState
     {
+        public static readonly Type endGame = typeof(EndGameState);
+        public abstract GameState Main();
+
     }
 }
