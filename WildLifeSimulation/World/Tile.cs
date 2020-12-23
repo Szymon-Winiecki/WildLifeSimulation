@@ -65,9 +65,9 @@ namespace WildLifeSimulation.World
         {
             animals.Add(animal);
         }
-        public bool RemoveAnimal(Animal animal)
+        public void RemoveAnimal(Animal animal)
         {
-            return animals.Remove(animal);
+            animals.Remove(animal);
         }
 
         public bool ContainsAnimal(Animal animal)

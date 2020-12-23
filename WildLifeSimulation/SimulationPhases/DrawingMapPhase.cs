@@ -11,7 +11,7 @@ namespace WildLifeSimulation.SimulationPhases
 
         public static string GetLegend()
         {
-            return  "┼──────┼ every tile is represented like that\n" +
+            return  "┼──────┼ every tile is diplayed like that\n" +
                     "│P:5   │ P: number of predators in this tile\n" +
                     "│O:10  | O: number of other animals in this tile\n" +
                     "┼──────┼";

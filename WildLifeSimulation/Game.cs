@@ -11,7 +11,6 @@ namespace WildLifeSimulation
         {
             if (isRunning)
             {
-                //add some error
                 return;
             }
 

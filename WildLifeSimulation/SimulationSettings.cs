@@ -95,7 +95,7 @@ namespace WildLifeSimulation
             Report = report;
         }
 
-        public SimulationSettings() : this(5, 5, 2, 20, 50, 0.5f, true) { }
+        public SimulationSettings() : this(6, 6, 2, 20, 400, 0.2f, true) { }
 
         public override string ToString()
         {

@@ -8,7 +8,7 @@ namespace WildLifeSimulation.GameStates
     {
         public override GameState Main()
         {
-            return this;//tmp
+            return this;
         }
     }
 }
