@@ -6,73 +6,71 @@ namespace WildLifeSimulation.World
 {
     class Tile
     {
-        private List<Animal> animals;
-        public List<Animal> Animals
-        { get { return animals; } }
+        private List<Animal> nonPredotors;
+        private List<Predator> predators;
+
+        public List<Animal> NonPredators
+        { get { return nonPredotors; } }
+        public List<Predator> Predators
+        { get { return predators; } }
 
         public Tile()
         {
-            animals = new List<Animal>();
-        }
-
-        public int GetNumberOfAnimals()
-        {
-            return animals.Count;
-        }
-        public int GetNumberOfPredators()
-        {
-            int counter = 0;
-            foreach (Animal animal in animals)
-            {
-                if (animal is Predator)
-                    counter++;
-            }
-            return counter;
-        }
-        public int GetNumberOfNonPredators()
-        {
-            int counter = 0;
-            foreach (Animal animal in animals)
-            {
-                if (animal is Animal && !(animal is Predator))
-                    counter++;
-            }
-            return counter;
+            nonPredotors = new List<Animal>();
+            predators = new List<Predator>();
         }
 
         public Animal FindPartner(Type species, Gender partnerGender)
         {
-            foreach (Animal animal in animals)
+            if (species.IsSubclassOf(typeof(Predator)))
             {
-                if (animal.GetType() == species && animal.Gender == partnerGender && animal.IsAbleToBreed)
-                    return animal;
+                foreach (Predator predator in predators)
+                {
+                    if (predator.GetType() == species && predator.Gender == partnerGender && predator.IsAbleToBreed)
+                        return predator;
+                }
             }
+            else
+            {
+                foreach (Animal animal in nonPredotors)
+                {
+                    if (animal.GetType() == species && animal.Gender == partnerGender && animal.IsAbleToBreed)
+                        return animal;
+                }
+            }
+            
             return null;
         }
 
         public Animal GetAnyNonPredator()
         {
-            foreach (Animal animal in animals)
+            if(nonPredotors.Count > 0)
             {
-                if (!(animal is Predator))
-                    return animal;
+                return nonPredotors[0];
             }
             return null;
         }
 
-
         public void AddAnimal(Animal animal)
         {
-            animals.Add(animal);
-        }
-        public void RemoveAnimal(Animal animal)
-        {
-            animals.Remove(animal);
+            if (animal.GetType().IsSubclassOf(typeof(Predator))){
+                predators.Add(animal as Predator);
+            }
+            else
+            {
+                nonPredotors.Add(animal);
+            }
         }
 
-        public bool ContainsAnimal(Animal animal)
+        public void RemoveAnimal(Animal animal)
         {
-            return animals.Contains(animal);
+            if (animal.GetType().IsSubclassOf(typeof(Predator))){
+                predators.Remove(animal as Predator);
+            }
+            else
+            {
+                nonPredotors.Remove(animal);
+            }
         }
     }
 }

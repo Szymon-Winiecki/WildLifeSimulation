@@ -19,7 +19,6 @@ namespace WildLifeSimulation.World
             this.y = y;
         }
         public Position(Position position) : this(position.X, position.Y) { }
-        public Position() : this(0, 0) { }
 
         public Position ChangePosition(MotionVector motionVector)
         {

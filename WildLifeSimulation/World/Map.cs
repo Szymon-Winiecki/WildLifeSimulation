@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using WildLifeSimulation.Animals;
 
 
@@ -8,8 +7,6 @@ namespace WildLifeSimulation.World
 {
     class Map
     {
-        public static readonly int defaultSize = 10;
-
         private Tile[,] tiles;
         public int Width
         { get; set; }
@@ -32,11 +29,17 @@ namespace WildLifeSimulation.World
             }
         }
 
-        public Map() : this(Map.defaultSize, Map.defaultSize) { }
-
         public Tile GetTileAt(Position position)
         {
-            return tiles[position.X, position.Y];
+            if(position.X > 0 && position.X < this.Width && position.Y > 0 && position.Y < this.Height)
+            {
+                return tiles[position.X, position.Y];
+            }
+            else
+            {
+                Console.WriteLine("Position: " + position + "does not exist on the map");
+                return null;
+            }
         }
 
         public List<Animal> GetAllAnimals()
@@ -44,14 +47,20 @@ namespace WildLifeSimulation.World
             List<Animal> allAnimals = new List<Animal>();
             foreach(Tile tile in tiles)
             {
-                allAnimals.AddRange(tile.Animals);
+                allAnimals.AddRange(tile.Predators);
+                allAnimals.AddRange(tile.NonPredators);
             }
             return allAnimals;
         }
 
-        public List<Animal> GetAllPredators()
+        public List<Predator> GetAllPredators()
         {
-            return (List<Animal>)GetAllAnimals().Where(animal => animal.GetType().IsSubclassOf(typeof(Predator))).ToList();
+            List<Predator> allPredators = new List<Predator>();
+            foreach (Tile tile in tiles)
+            {
+                allPredators.AddRange(tile.Predators);
+            }
+            return allPredators;
         }
 
     }

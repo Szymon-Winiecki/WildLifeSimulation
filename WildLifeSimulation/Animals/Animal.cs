@@ -39,10 +39,6 @@ namespace WildLifeSimulation.Animals
         {
             get { return position; }
         }
-        public static List<Type> GetAvailableSpecies()
-        {
-            return availableSpecies;
-        }
         public static List<Type> GetAvailableSpecies(bool predators)
         {
             return availableSpecies.Where(species => species.IsSubclassOf(typeof(Predator)) == predators).ToList();
