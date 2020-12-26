@@ -31,7 +31,7 @@ namespace WildLifeSimulation.World
 
         public Tile GetTileAt(Position position)
         {
-            if(position.X > 0 && position.X < this.Width && position.Y > 0 && position.Y < this.Height)
+            if(position.X >= 0 && position.X <= this.Width && position.Y >= 0 && position.Y <= this.Height)
             {
                 return tiles[position.X, position.Y];
             }
