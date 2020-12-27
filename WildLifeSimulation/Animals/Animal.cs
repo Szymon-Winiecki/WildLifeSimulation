@@ -58,10 +58,22 @@ namespace WildLifeSimulation.Animals
         public void Move() 
         {
             Position oldPosition = new Position(this.Position);
-            map.GetTileAt(position).RemoveAnimal(this);
+            Tile tile = map.GetTileAt(position);
+            if(tile == null)
+            {
+                Console.WriteLine("That's strange, animal lives at not existing tile");
+                return;
+            }
+            tile.RemoveAnimal(this);
 
             position.ChangePosition(MotionVector.RandomWithLimitations(position, map));
-            map.GetTileAt(position).AddAnimal(this);
+            tile = map.GetTileAt(position);
+            if (tile == null)
+            {
+                Console.WriteLine("Animal cannot move to not existing location");
+                return;
+            }
+            tile.AddAnimal(this);
 
             reporter.ReportMove(this, oldPosition);
 
@@ -70,7 +82,14 @@ namespace WildLifeSimulation.Animals
         public void FindPartner() 
         {
             Gender partnerGender = (this.Gender == Gender.Male) ? (Gender.Female) : (Gender.Male);
-            Animal partner = map.GetTileAt(position).FindPartner(this.GetType(), partnerGender);
+            Tile tile = map.GetTileAt(position);
+            if (tile == null)
+            {
+                Console.WriteLine("That's strange, animal lives at not existing tile");
+                return;
+            }
+
+            Animal partner = tile.FindPartner(this.GetType(), partnerGender);
             if(partner == null)
             {
                 return;
@@ -96,12 +115,29 @@ namespace WildLifeSimulation.Animals
         protected virtual void giveBirth(Gender babyGender)
         {
             Animal baby = (Animal)Activator.CreateInstance(this.GetType(), this.map, babyGender, new Position(this.position), reporter);
-            map.GetTileAt(position).AddAnimal(baby);
+            Tile tile = map.GetTileAt(position);
+            if (tile == null)
+            {
+                Console.WriteLine("Baby cannot be born at not existing tile");
+                return;
+            }
+            if (baby == null)
+            {
+                Console.WriteLine("something went wrong in childbirth");
+                return;
+            }
+            tile.AddAnimal(baby);
             reporter.ReportBirth(baby);
         }
         public virtual void Die()
         {
-            map.GetTileAt(position).RemoveAnimal(this);
+            Tile tile = map.GetTileAt(position);
+            if (tile == null)
+            {
+                Console.WriteLine("That's strange, animal tries to die at not existing tile");
+                return;
+            }
+            tile.RemoveAnimal(this);
         }
 
         public override string ToString() => this.Gender + " " + this.GetType().Name;

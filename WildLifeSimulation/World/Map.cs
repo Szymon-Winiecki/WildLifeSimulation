@@ -15,6 +15,16 @@ namespace WildLifeSimulation.World
 
         public Map(int width, int height)
         {
+            if(width < 0)
+            {
+                Console.WriteLine("Map width has to be a positive integer. Width is set up to default value of 4.");
+                width = 4;
+            }
+            if(height < 0)
+            {
+                Console.WriteLine("Map height has to be a positive integer. Height is set up to default value of 4.");
+                height = 4;
+            }
             this.Width = width;
             this.Height = height;
 

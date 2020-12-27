@@ -53,6 +53,12 @@ namespace WildLifeSimulation.World
 
         public void AddAnimal(Animal animal)
         {
+            if(animal == null)
+            {
+                Console.WriteLine("animal cannot be null");
+                return;
+            }
+            
             if (animal.GetType().IsSubclassOf(typeof(Predator))){
                 predators.Add(animal as Predator);
             }
@@ -64,6 +70,12 @@ namespace WildLifeSimulation.World
 
         public void RemoveAnimal(Animal animal)
         {
+            if (animal == null)
+            {
+                Console.WriteLine("animal cannot be null");
+                return;
+            }
+            
             if (animal.GetType().IsSubclassOf(typeof(Predator))){
                 predators.Remove(animal as Predator);
             }

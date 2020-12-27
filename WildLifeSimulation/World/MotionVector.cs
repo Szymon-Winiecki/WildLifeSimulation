@@ -32,13 +32,12 @@ namespace WildLifeSimulation.World
 
         public static MotionVector RandomMoveFrom(List<MotionVector> vectors)
         {
-            int vectorsCount = vectors.Count;
-            if(vectorsCount == 0)
+            if(vectors.Count == 0)
             {
                 return MotionVector.Zero;
             }
 
-            int randomNumber = random.Next(vectorsCount);
+            int randomNumber = random.Next(vectors.Count);
 
             return (vectors[randomNumber]);
         }

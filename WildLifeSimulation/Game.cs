@@ -45,6 +45,12 @@ namespace WildLifeSimulation
             List<Type> predatorSpecies = Animal.GetAvailableSpecies(true);
             List<Type> nonPredatorSpecies = Animal.GetAvailableSpecies(false);
 
+            if(predatorSpecies == null || predatorSpecies.Count == 0 || nonPredatorSpecies == null || nonPredatorSpecies.Count == 0)
+            {
+                Console.WriteLine("There aren't any animal species");
+                return;
+            }
+
             Random random = new Random();
             Console.WriteLine();
 

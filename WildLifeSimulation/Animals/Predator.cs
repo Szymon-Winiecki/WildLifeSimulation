@@ -45,7 +45,18 @@ namespace WildLifeSimulation.Animals
         protected override void giveBirth(Gender babyGender)
         {
             Animal baby = (Animal)Activator.CreateInstance(this.GetType(), this.map, babyGender, new Position(this.position), this.maxHealthPoints, reporter);
-            map.GetTileAt(position).AddAnimal(baby);
+            Tile tile = map.GetTileAt(position);
+            if (tile == null)
+            {
+                Console.WriteLine("Baby cannot be born at not existing tile");
+                return;
+            }
+            if(baby == null)
+            {
+                Console.WriteLine("something went wrong in childbirth");
+                return;
+            }
+            tile.AddAnimal(baby);
             reporter.ReportBirth(baby);
         }
     }

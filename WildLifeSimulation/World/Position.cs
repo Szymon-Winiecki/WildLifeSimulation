@@ -6,7 +6,7 @@ namespace WildLifeSimulation.World
     {
         private int x;
         private int y;
-        public int X 
+        public int X
         { get { return x; } }
         public int Y
         { get { return y; } }
