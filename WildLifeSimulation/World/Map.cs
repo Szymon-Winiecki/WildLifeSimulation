@@ -7,6 +7,9 @@ namespace WildLifeSimulation.World
 {
     class Map
     {
+        public List<Predator> allPredators;
+        public List<Animal> allNonPredators;
+
         private Tile[,] tiles;
         public int Width
         { get; set; }
@@ -34,9 +37,12 @@ namespace WildLifeSimulation.World
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    tiles[i, j] = new Tile();
+                    tiles[i, j] = new Tile(this);
                 }
             }
+
+            allNonPredators = new List<Animal>();
+            allPredators = new List<Predator>();
         }
 
         public Tile GetTileAt(Position position)
@@ -50,27 +56,6 @@ namespace WildLifeSimulation.World
                 Console.WriteLine("Position: " + position + "does not exist on the map");
                 return null;
             }
-        }
-
-        public List<Animal> GetAllAnimals()
-        {
-            List<Animal> allAnimals = new List<Animal>();
-            foreach(Tile tile in tiles)
-            {
-                allAnimals.AddRange(tile.Predators);
-                allAnimals.AddRange(tile.NonPredators);
-            }
-            return allAnimals;
-        }
-
-        public List<Predator> GetAllPredators()
-        {
-            List<Predator> allPredators = new List<Predator>();
-            foreach (Tile tile in tiles)
-            {
-                allPredators.AddRange(tile.Predators);
-            }
-            return allPredators;
         }
 
     }

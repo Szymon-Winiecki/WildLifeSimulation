@@ -65,7 +65,7 @@ namespace WildLifeSimulation
 
                 Animal newAnimal = (Animal)Activator.CreateInstance(newAnimalSpecies, this.map, newAnimalGender, newAnimalPosition, 2, reporter);
                 reporter.ReportBirth(newAnimal);
-                map.GetTileAt(newAnimalPosition).AddAnimal(newAnimal);
+                map.GetTileAt(newAnimalPosition).AddAnimal(newAnimal, true);
             }
 
             for (int i = 0; i < nonPredatorsNumber; i++)
@@ -76,7 +76,7 @@ namespace WildLifeSimulation
 
                 Animal newAnimal = (Animal)Activator.CreateInstance(newAnimalSpecies, this.map, newAnimalGender, newAnimalPosition, reporter);
                 reporter.ReportBirth(newAnimal);
-                map.GetTileAt(newAnimalPosition).AddAnimal(newAnimal);
+                map.GetTileAt(newAnimalPosition).AddAnimal(newAnimal, true);
             }
 
         }
@@ -102,46 +102,59 @@ namespace WildLifeSimulation
 
         public void Move()
         {
-            List<Animal> animals = map.GetAllAnimals();
-            if (animals.Count == 0)
+            if (map.allPredators.Count == 0)
             {
                 anyPredatorAlive = false;
                 return;
             }
 
-            foreach (Animal animal in animals)
+            foreach (Animal animal in map.allNonPredators)
             {
                 animal.Move();
+            }
+            foreach (Predator predator in map.allPredators)
+            {
+                predator.Move();
             }
         }
 
         public void Hunt()
         {
-            List<Predator> predators = map.GetAllPredators();
-            if (predators.Count == 0)
+            if (map.allPredators.Count == 0)
             {
                 anyPredatorAlive = false;
                 return;
             }
 
-            foreach (Predator predator in predators)
+            for(int i = 0; i < map.allPredators.Count; i++)
             {
-                predator.Hunt();
+                bool predatorIsStillAlive = map.allPredators[i].Hunt();
+
+                if (!predatorIsStillAlive)
+                {
+                    i--;
+                }
             }
         }
 
         public void Breed()
         {
-            List<Animal> animals = map.GetAllAnimals();
-            if (animals.Count == 0)
+            if (map.allPredators.Count == 0)
             {
                 anyPredatorAlive = false;
                 return;
             }
 
-            foreach (Animal animal in animals)
+            int predatorsCount = map.allPredators.Count;
+            int nonPredatorsCount = map.allNonPredators.Count;
+
+            for(int i = 0; i < nonPredatorsCount; i++)
             {
-                animal.FindPartner();
+                map.allNonPredators[i].FindPartner();
+            }
+            for (int i = 0; i < predatorsCount; i++)
+            {
+                map.allPredators[i].FindPartner();
             }
         }
 

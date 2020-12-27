@@ -9,13 +9,16 @@ namespace WildLifeSimulation.World
         private List<Animal> nonPredotors;
         private List<Predator> predators;
 
+        private Map map;
+
         public List<Animal> NonPredators
         { get { return nonPredotors; } }
         public List<Predator> Predators
         { get { return predators; } }
 
-        public Tile()
+        public Tile(Map map)
         {
+            this.map = map;
             nonPredotors = new List<Animal>();
             predators = new List<Predator>();
         }
@@ -51,7 +54,7 @@ namespace WildLifeSimulation.World
             return null;
         }
 
-        public void AddAnimal(Animal animal)
+        public void AddAnimal(Animal animal, bool affectGlobalList)
         {
             if(animal == null)
             {
@@ -61,14 +64,22 @@ namespace WildLifeSimulation.World
             
             if (animal.GetType().IsSubclassOf(typeof(Predator))){
                 predators.Add(animal as Predator);
+                if (affectGlobalList)
+                {
+                    map.allPredators.Add(animal as Predator);
+                }
             }
             else
             {
                 nonPredotors.Add(animal);
+                if (affectGlobalList)
+                {
+                    map.allNonPredators.Add(animal);
+                }
             }
         }
 
-        public void RemoveAnimal(Animal animal)
+        public void RemoveAnimal(Animal animal, bool affectGlobalList)
         {
             if (animal == null)
             {
@@ -78,10 +89,18 @@ namespace WildLifeSimulation.World
             
             if (animal.GetType().IsSubclassOf(typeof(Predator))){
                 predators.Remove(animal as Predator);
+                if (affectGlobalList)
+                {
+                    map.allPredators.Remove(animal as Predator);
+                }
             }
             else
             {
                 nonPredotors.Remove(animal);
+                if (affectGlobalList)
+                {
+                    map.allNonPredators.Remove(animal);
+                }
             }
         }
     }

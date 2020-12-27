@@ -13,7 +13,7 @@ namespace WildLifeSimulation.Animals
             this.maxHealthPoints = maxHp;
             this.actualHealthPoints = maxHp;
         }
-        public void Hunt() 
+        public bool Hunt() 
         {
             Animal prey = map.GetTileAt(position).GetAnyNonPredator();
             if (prey == null)
@@ -22,12 +22,14 @@ namespace WildLifeSimulation.Animals
                 if(actualHealthPoints == 0)
                 {
                     Die();
+                    return false;
                 }
             }
             else
             {
                 Eat(prey);
             }
+            return true;
         }
         protected void Eat(Animal prey) 
         {
@@ -56,7 +58,7 @@ namespace WildLifeSimulation.Animals
                 Console.WriteLine("something went wrong in childbirth");
                 return;
             }
-            tile.AddAnimal(baby);
+            tile.AddAnimal(baby, true);
             reporter.ReportBirth(baby);
         }
     }

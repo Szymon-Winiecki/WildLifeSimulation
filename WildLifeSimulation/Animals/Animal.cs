@@ -64,7 +64,7 @@ namespace WildLifeSimulation.Animals
                 Console.WriteLine("That's strange, animal lives at not existing tile");
                 return;
             }
-            tile.RemoveAnimal(this);
+            tile.RemoveAnimal(this, false);
 
             position.ChangePosition(MotionVector.RandomWithLimitations(position, map));
             tile = map.GetTileAt(position);
@@ -73,7 +73,7 @@ namespace WildLifeSimulation.Animals
                 Console.WriteLine("Animal cannot move to not existing location");
                 return;
             }
-            tile.AddAnimal(this);
+            tile.AddAnimal(this, false);
 
             reporter.ReportMove(this, oldPosition);
 
@@ -126,7 +126,7 @@ namespace WildLifeSimulation.Animals
                 Console.WriteLine("something went wrong in childbirth");
                 return;
             }
-            tile.AddAnimal(baby);
+            tile.AddAnimal(baby, true);
             reporter.ReportBirth(baby);
         }
         public virtual void Die()
@@ -137,7 +137,7 @@ namespace WildLifeSimulation.Animals
                 Console.WriteLine("That's strange, animal tries to die at not existing tile");
                 return;
             }
-            tile.RemoveAnimal(this);
+            tile.RemoveAnimal(this, true);
         }
 
         public override string ToString() => this.Gender + " " + this.GetType().Name;
